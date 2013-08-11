@@ -142,13 +142,17 @@ function setpaths()
     gccprebuiltdir=$(get_abs_build_var ANDROID_GCC_PREBUILTS)
     gccprebuiltextradir=$(get_abs_build_var ANDROID_GCC_PREBUILTS_EXTRA)
 
+    # defined in core/config.mk
+    targetgccversion=$(get_build_var TARGET_GCC_VERSION)
+    export TARGET_GCC_VERSION=$targetgccversion
+
     # The gcc toolchain does not exists for windows/cygwin. In this case, do not reference it.
     export ANDROID_EABI_TOOLCHAIN=
     local ARCH=$(get_build_var TARGET_ARCH)
     case $ARCH in
-        x86) toolchaindir=x86/i686-android-linux-4.4.3/bin
+        x86) toolchaindir=x86/i686-android-linux-$targetgccversion/bin
             ;;
-        arm) toolchaindir=arm/arm-linux-androideabi-4.8/bin
+        arm) toolchaindir=arm/arm-linux-androideabi-$targetgccversion/bin
             ;;
         *)
             echo "Can't find toolchain for unknown architecture: $ARCH"
@@ -163,9 +167,9 @@ function setpaths()
 
     export ARM_EABI_TOOLCHAIN=
     case $ARCH in
-        x86) toolchaindir=x86/i686-eabi-4.4.3/bin
+        x86) toolchaindir=x86/i686-eabi-$targetgccversion/bin
             ;;
-        arm) toolchaindir=arm/arm-eabi-4.8/bin
+        arm) toolchaindir=arm/arm-eabi-$targetgccversion/bin
             ;;
         *)
             echo "Can't find toolchain for unknown architecture: $ARCH"
@@ -209,6 +213,10 @@ function setpaths()
     # needed for building linux on MacOS
     # TODO: fix the path
     #export HOST_EXTRACFLAGS="-I "$T/system/kernel_headers/host_include
+
+    echo "Toolchain - ANDROID: " $ANDROID_EABI_TOOLCHAIN
+    echo "Toolchain - EABI: " $ARM_EABI_TOOLCHAIN
+
 }
 
 function printconfig()
