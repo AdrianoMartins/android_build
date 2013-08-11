@@ -196,6 +196,9 @@ function setpaths()
     export ANDROID_PRODUCT_OUT=$(get_abs_build_var PRODUCT_OUT)
     export OUT=$ANDROID_PRODUCT_OUT
 
+    unset ANDROID_BUILD_TOP
+    export ANDROID_BUILD_TOP=$T
+
     unset ANDROID_HOST_OUT
     export ANDROID_HOST_OUT=$(get_abs_build_var HOST_OUT)
 
@@ -224,6 +227,7 @@ function set_stuff_for_environment()
     set_java_home
     setpaths
     set_sequence_number
+    build_toolchain
 
     export ANDROID_BUILD_TOP=$(gettop)
 }
@@ -267,6 +271,15 @@ function addcompletions()
             echo "including $f"
             . $f
         done
+    fi
+}
+
+function build_toolchain()
+{
+    local build_type=$TARGET_BUILD_TYPE
+    local dev_type=development
+    if [ "$build_type" = "$dev_type" ]; then
+        $T/external/codefirex/build.sh
     fi
 }
 
@@ -722,7 +735,7 @@ function gettop
             T=
             while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
                 cd .. > /dev/null
-                T=`PWD= /bin/pwd`
+                T=`PWD= /bin/pwd -P`
             done
             cd $HERE > /dev/null
             if [ -f "$T/$TOPFILE" ]; then
