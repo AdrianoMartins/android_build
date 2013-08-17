@@ -284,9 +284,8 @@ function addcompletions()
 
 function build_toolchain()
 {
-    local build_type=$TARGET_BUILD_TYPE
-    local dev_type=development
-    if [ "$build_type" = "$dev_type" ]; then
+    local build_gcc=$TARGET_GCC_VERSION_EXP
+    if [ -z "$build_gcc" ]; then
         $T/external/codefirex/build.sh
     fi
 }
