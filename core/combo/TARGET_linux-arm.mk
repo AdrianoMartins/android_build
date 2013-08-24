@@ -109,7 +109,7 @@ arch_include_dir := $(dir $(android_config_h))
 
 ifeq ($(TARGET_DISABLE_ARM_PIE),true)
    PIE_GLOBAL_CFLAGS :=
-   PIE_EXECUTABLE_TRANSFORM := -Wl,-T,$(BUILD_SYSTEM)/armelf.x
+   PIE_EXECUTABLE_TRANSFORM :=
 else
    PIE_GLOBAL_CFLAGS := -fPIE
    PIE_EXECUTABLE_TRANSFORM := -fPIE -pie
