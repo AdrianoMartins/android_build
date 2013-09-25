@@ -146,6 +146,10 @@ function setpaths()
     targetgccversion=$(get_build_var TARGET_GCC_VERSION)
     export TARGET_GCC_VERSION=$targetgccversion
 
+    # defined in core/config.mk
+    targetgccoptimization=$(get_build_var TARGET_GCC_OPTIMIZATION_LEVEL)
+    export TARGET_GCC_OPTIMIZATION_LEVEL=$targetgccoptimization
+
     # The gcc toolchain does not exists for windows/cygwin. In this case, do not reference it.
     export ANDROID_EABI_TOOLCHAIN=
     local ARCH=$(get_build_var TARGET_ARCH)

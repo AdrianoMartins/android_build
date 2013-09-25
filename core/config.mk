@@ -228,6 +228,13 @@ else
 	TARGET_GCC_VERSION := $(TARGET_GCC_VERSION_EXP)
 endif
 
+# default target GCC optimization level
+ifeq ($(strip $(TARGET_GCC_OPTIMIZATION)),)
+	TARGET_GCC_OPTIMIZATION_LEVEL := -O2
+else
+	TARGET_GCC_OPTIMIZATION_LEVEL := $(TARGET_GCC_OPTIMIZATION)
+endif
+
 # $(1): os/arch
 define select-android-config-h
 system/core/include/arch/$(1)/AndroidConfig.h
