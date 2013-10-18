@@ -102,11 +102,13 @@ endif
 ifneq ($(filter 4.8 4.8.% 4.9 4.9.%, $(TARGET_GCC_VERSION)),)
 TARGET_arm_CFLAGS +=  -Wno-unused-parameter \
                       -Wno-unused-value \
-                      -Wno-unused-function
+                      -Wno-unused-function \
+                      -Wno-unused-variable
 
 TARGET_thumb_CFLAGS +=  -Wno-unused-parameter \
                         -Wno-unused-value \
-                        -Wno-unused-function
+                        -Wno-unused-function \
+                        -Wno-unused-variable
 endif
 
 # Include compatibility makefile for tricky optimizations
