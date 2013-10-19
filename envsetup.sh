@@ -290,7 +290,8 @@ function build_toolchain()
 {
     local build_gcc=$TARGET_GCC_VERSION_EXP
     if [ -z "$build_gcc" ]; then
-        $T/external/codefirex/build.sh
+        toolchain_build arm-linux-androideabi
+        toolchain_build arm-eabi
     fi
 }
 
@@ -1828,3 +1829,8 @@ done
 unset f
 
 addcompletions
+
+export ANDROID_BUILD_TOP=$(gettop)
+
+# Get toolchain build functions
+source $ANDROID_BUILD_TOP/toolchain/build.sh
