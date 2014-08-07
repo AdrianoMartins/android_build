@@ -34,11 +34,8 @@ ifeq ($(strip $(TARGET_ARCH_VARIANT)),)
 TARGET_ARCH_VARIANT := armv5te
 endif
 
-# This specifies toolchain being used. In case of issues, stick with 4.7
-# 4.9.2 is default in my optimizations, as it gives noticable performance boost
 ifeq ($(strip $(TARGET_GCC_VERSION_EXP)),)
-#TARGET_GCC_VERSION := 4.7
-TARGET_GCC_VERSION := 4.9.2
+TARGET_GCC_VERSION := 4.7
 else
 TARGET_GCC_VERSION := $(TARGET_GCC_VERSION_EXP)
 endif
